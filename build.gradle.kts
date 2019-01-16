@@ -17,8 +17,8 @@ dependencies {
     implementation("io.ktor:ktor-server-netty:$ktor_version")
     implementation("io.ktor:ktor-jackson:$ktor_version")
 
-    implementation("org.koin:koin-core:$koin_version")
     implementation("org.koin:koin-ktor:$koin_version")
+    implementation("org.koin:koin-logger-slf4j:$koin_version")
 
     implementation("ch.qos.logback:logback-classic:$logback_version")
 
