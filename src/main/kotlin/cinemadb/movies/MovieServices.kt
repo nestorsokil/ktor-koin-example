@@ -1,24 +1,19 @@
 package cinemadb.movies
 
 
-class MovieService {
-    fun findAll(): List<MovieDto> {
-        return listOf(MovieDto("1"), MovieDto("2"))
+class MovieService(private val movieRepository: MovieRepository) {
+
+    suspend fun findAll() = movieRepository.findAll()
+
+    suspend fun findOne(id: String) = movieRepository.findOne(id)
+
+    suspend fun create(input: MovieDto) = movieRepository.create(input).id!!
+
+    suspend fun update(id: String, input: MovieDto) {
+        movieRepository.update(id, input)
     }
 
-    fun findOne(id: String): MovieDto {
-        return MovieDto("3")
-    }
-
-    fun create(input: MovieDto): MovieDto {
-        return MovieDto("4")
-    }
-
-    fun update(id: String, input: MovieDto) {
-
-    }
-
-    fun delete(id: String) {
-
+    suspend fun delete(id: String) {
+        movieRepository.delete(id)
     }
 }

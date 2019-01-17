@@ -1,5 +1,6 @@
 package cinemadb.movies
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import io.ktor.application.call
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
@@ -14,9 +15,13 @@ import io.ktor.routing.route
 import io.ktor.util.url
 import org.koin.dsl.module.module
 import org.koin.ktor.ext.inject
+import java.time.Duration
+import java.time.LocalDate
+import java.util.UUID
 
 val movieModule = module {
-    single { MovieService() }
+    single { MovieService(get()) }
+    single { MovieRepository(get()) }
 }
 
 fun Routing.moviesV1() {
@@ -38,7 +43,7 @@ fun Routing.moviesV1() {
         post("/") {
             val result = movieService.create(call.receive())
             call.response.headers.append(HttpHeaders.Location, call.url {
-                encodedPath += "/" + result.id
+                encodedPath += "/" + result
             })
             call.respond(HttpStatusCode.Created)
         }
@@ -55,4 +60,15 @@ fun Routing.moviesV1() {
     }
 }
 
-data class MovieDto(val id: String)
+data class MovieDto(
+    val id: String? = UUID.randomUUID().toString(),
+    val name: String,
+    val genre: MovieGenre,
+    val duration: Duration,
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    val releaseDate: LocalDate
+)
+
+enum class MovieGenre {
+    ACTION, ADVENTURE, COMEDY, DRAMA, FANTASY, HORROR, ROMANCE, SCIENCE_FICTION, THRILLER, WESTERN
+}

@@ -1,5 +1,6 @@
 package cinemadb
 
+import cinemadb.core.coreModule
 import cinemadb.movies.movieModule
 import cinemadb.movies.moviesV1
 import com.fasterxml.jackson.databind.SerializationFeature
@@ -11,12 +12,17 @@ import io.ktor.features.ContentNegotiation
 import io.ktor.features.DefaultHeaders
 import io.ktor.jackson.jackson
 import io.ktor.routing.routing
+import org.koin.core.KoinProperties
 import org.koin.log.Logger.SLF4JLogger
 import org.koin.standalone.StandAloneContext.startKoin
 
 fun Application.main() {
 
-    startKoin(listOf(movieModule), logger = SLF4JLogger())
+    startKoin(
+        listOf(movieModule, coreModule),
+        KoinProperties(useKoinPropertiesFile = true),
+        SLF4JLogger()
+    )
 
     install(DefaultHeaders)
     install(CallLogging)
