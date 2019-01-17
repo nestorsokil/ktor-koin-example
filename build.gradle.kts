@@ -10,6 +10,7 @@ repositories {
 val ktor_version = "1.1.1"
 val logback_version = "1.2.3"
 val koin_version = "1.0.2"
+val jasync_version = "0.8.64"
 val jackson_version = "2.9.2"
 
 dependencies {
@@ -20,6 +21,8 @@ dependencies {
 
     implementation("org.koin:koin-ktor:$koin_version")
     implementation("org.koin:koin-logger-slf4j:$koin_version")
+
+    implementation("com.github.jasync-sql:jasync-mysql:$jasync_version")
 
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jackson_version")
 
