@@ -1,5 +1,12 @@
+buildscript {
+    dependencies {
+        classpath("mysql:mysql-connector-java:8.0.13")
+    }
+}
+
 plugins {
     id("org.jetbrains.kotlin.jvm").version("1.3.11")
+    id("org.flywaydb.flyway").version("5.2.4")
     application
 }
 
@@ -30,6 +37,12 @@ dependencies {
 
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+}
+
+flyway {
+    url = "jdbc:mysql://localhost:3306/cinemadb"
+    user = "user"
+    password = "password"
 }
 
 application {
