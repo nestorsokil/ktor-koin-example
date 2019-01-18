@@ -1,4 +1,8 @@
-In Intellij go to:
+1. Run `docker-compose up`
+ 
+2. Run `gradle flywayMigrate`
+
+3. In Intellij go to:
 
 ```
 Run > Edit Configurations...
