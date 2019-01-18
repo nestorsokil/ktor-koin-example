@@ -6,10 +6,12 @@ CREATE TABLE movies
   genre        VARCHAR(255) NOT NULL,
   duration     VARCHAR(255) NOT NULL,
   release_date DATE         NOT NULL,
+  director_id  CHAR(36)     NOT NULL,
   created      TIMESTAMP             DEFAULT CURRENT_TIMESTAMP,
   updated      TIMESTAMP             DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
-  UNIQUE (name, release_date)
+  UNIQUE (name, release_date),
+  FOREIGN KEY (director_id) REFERENCES persons (id)
 )
   CHARACTER SET = utf8;
 
@@ -26,5 +28,3 @@ CREATE TABLE persons
   PRIMARY KEY (id)
 )
   CHARACTER SET = utf8;
-
-
