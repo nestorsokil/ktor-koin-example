@@ -3,6 +3,8 @@ package cinemadb
 import cinemadb.core.coreModule
 import cinemadb.movies.movieModule
 import cinemadb.movies.moviesV1
+import cinemadb.persons.personModule
+import cinemadb.persons.personsV1
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import io.ktor.application.Application
@@ -19,7 +21,7 @@ import org.koin.standalone.StandAloneContext.startKoin
 fun Application.main() {
 
     startKoin(
-        listOf(movieModule, coreModule),
+        listOf(coreModule, movieModule, personModule),
         KoinProperties(useKoinPropertiesFile = true),
         SLF4JLogger()
     )
@@ -35,5 +37,6 @@ fun Application.main() {
 
     routing {
         moviesV1()
+        personsV1()
     }
 }

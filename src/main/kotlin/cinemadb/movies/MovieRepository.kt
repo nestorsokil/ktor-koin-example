@@ -1,9 +1,9 @@
 package cinemadb.movies
 
+import cinemadb.core.getLocalDate
 import com.github.jasync.sql.db.RowData
 import com.github.jasync.sql.db.SuspendingConnection
 import java.time.Duration
-import java.time.LocalDate
 
 class MovieRepository(private val connection: SuspendingConnection) {
 
@@ -56,8 +56,5 @@ internal fun movieDtoFrom(rowData: RowData): MovieDto {
     )
 }
 
-//TODO remove once joda time is removed https://github.com/jasync-sql/jasync-sql/blob/master/TODO.md
-fun RowData.getLocalDate(column: String): LocalDate? {
-    val localDate = get(column) as org.joda.time.LocalDate?
-    return LocalDate.parse(localDate!!.toString("yyyy-MM-dd"))
-}
+
+

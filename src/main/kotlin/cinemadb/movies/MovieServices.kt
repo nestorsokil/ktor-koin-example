@@ -1,6 +1,5 @@
 package cinemadb.movies
 
-
 class MovieService(private val movieRepository: MovieRepository) {
 
     suspend fun findAll() = movieRepository.findAll()
